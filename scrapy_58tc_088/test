@@ -1,0 +1,35 @@
+1. scrapy项目的结果
+    项目名字
+       项目名字
+          spiders文件夹(存储的是爬虫文件)
+              init
+              自定义的爬虫文件     核心功能文件  *******
+
+          init
+          items         定义数据结构的地方  爬取的数据都包含哪些
+          middleware    中间件     代理
+          pipelines     管道      用来处理下载的数据
+          settings      配置文件    robots协议  ua定义等
+
+
+2.response的属性和方法
+    response.text       获取的是响应的字符串
+    response.body       获取的是二进制数据
+    response.xpath      可以直接使用xpath方法来解析response中的内容
+    response.extract()  提取seletor对象的data属性值
+    response.extract_first()  提取seletor列表的第一个数据
+
+
+3.scrapy工作原理：
+                1.引擎向spiders要url
+                2.引擎将要爬取的url给调度器
+                3.调度器会将url生成请求对象放入到指定的队列中
+                4.从队列中出队一个请求
+                5.引擎将请求交给下载器进行处理
+                6.下载器发送请求获取互联网数据
+                7.下载器将数据返回给引擎
+                8.引擎将数据再次交给spiders
+                9.spiders通过xpath解析该数据，得到数据或url
+                10.spiders将数据或url交给引擎
+                11.引擎判断是数据还是url，是数据就交给管道处理，是url就交给调度器处理
+
